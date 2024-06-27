@@ -11,4 +11,4 @@ COPY tests ./tests
 RUN cargo build --locked
 
 # Set the startup command to run the binary
-CMD ["cargo test --test api"]
+CMD ["cargo", "test"]

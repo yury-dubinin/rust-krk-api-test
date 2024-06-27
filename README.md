@@ -30,3 +30,6 @@ Remote execution (recomended):
 
 To build a docker image:
 - With Docker running execute -> `docker build -t rust_project .`
+
+To run tests inside a container:
+- With Docker running execute -> `docker run rust_project`

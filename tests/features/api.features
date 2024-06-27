@@ -1,0 +1,15 @@
+Feature: Krk API pair simple tests
+  As a user
+  I want to access the Spot API
+
+  Scenario: Get a server time
+    When I get the server time
+    Then the server time should be retrieved
+  
+  Scenario: Get a XBTUSD trading pair information
+    When I get the XBTUSD trading pair
+    Then the XBTUSD information should be retrieved
+
+  Scenario: Get all open orders
+    When I get all open orders
+    Then all open orders should be retrieved

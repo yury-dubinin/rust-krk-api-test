@@ -57,12 +57,12 @@ pub async fn i_get_the_time(world: &mut ApiWorld) {
 #[when("I get all open orders")]
 pub async fn i_get_the_orders(world: &mut ApiWorld) {
     let api_key = env::var("API_KEY").unwrap_or("+API_KEY".to_string());
-    let secret = env::var("PRIVATE_KEY").unwrap_or("+PRIVATE_KEY".to_string());;
+    let secret = env::var("PRIVATE_KEY").unwrap_or("+PRIVATE_KEY".to_string());
     let urlpath = "/0/private/OpenOrders";
     // nonce from compute 1719502312486, must be > 1616492376594003
     let nonce = compute_nonce() * 1000;
     println!("nonce -> {}",nonce);
-    let sign = compute_signature(secret, urlpath, &nonce).expect("No signature!");
+    let sign = compute_signature(&secret, urlpath, &nonce).expect("No signature!");
     let response = world
         .client
         .post("https://api.kraken.com/0/private/OpenOrders")

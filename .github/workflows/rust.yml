@@ -11,7 +11,7 @@ env:
 jobs:
   build:
     environment:
-      name: rust_krk
+      name: krk-rust
     runs-on: ubuntu-latest
 
     steps:
@@ -19,4 +19,7 @@ jobs:
     - name: Build
       run: cargo build --verbose
     - name: Run tests
+      env:
+        API_KEY: ${{ secrets.API_KEY }}
+        PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
       run: cargo test --verbose

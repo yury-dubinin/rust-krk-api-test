@@ -24,9 +24,9 @@ pub struct ApiWorld {
 
 #[when("I get the XBTUSD trading pair")]
 pub async fn i_get_the_trading_pair(world: &mut ApiWorld) {
-    // sleep is just to show that staff runs async
+    let api_url = env::var("API").unwrap_or("api.krk.com".to_string());
+    // sleep is just to show that staff runs 
     sleep(Duration::from_secs(2)).await;
-    let api_url = env::var("API").unwrap_or("+API_URL".to_string());
     let response = world
         .client
         .get(format!("https://{}/0/public/Ticker?pair={}", api_url, "XBTUSD"))
@@ -42,8 +42,8 @@ pub async fn i_get_the_trading_pair(world: &mut ApiWorld) {
 
 #[when("I get the server time")]
 pub async fn i_get_the_time(world: &mut ApiWorld) {
+    let api_url = env::var("API").unwrap_or("api.krk.com".to_string());
     sleep(Duration::from_secs(1)).await;
-    let api_url = env::var("API").unwrap_or("+API_URL".to_string());
     let response = world
         .client
         .get(format!("https://{}/0/public/Time", api_url))
@@ -59,7 +59,7 @@ pub async fn i_get_the_time(world: &mut ApiWorld) {
 
 #[when("I get all open orders")]
 pub async fn i_get_the_orders(world: &mut ApiWorld) {
-    let api_url = env::var("API").unwrap_or("+API_URL".to_string());
+    let api_url = env::var("API").unwrap_or("api.krk.com".to_string());
     let api_key = env::var("API_KEY").unwrap_or("+API_KEY".to_string());
     let secret = env::var("PRIVATE_KEY").unwrap_or("+PRIVATE_KEY".to_string());
     let urlpath = "/0/private/OpenOrders";

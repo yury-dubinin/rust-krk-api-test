@@ -19,6 +19,7 @@ jobs:
       run: cargo build --locked
     - name: Run tests
       env:
+        API: ${{ secrets.API }}
         API_KEY: ${{ secrets.API_KEY }}
         PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
       run: cargo test --test api

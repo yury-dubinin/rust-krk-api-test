@@ -27,7 +27,7 @@ pub async fn i_get_the_trading_pair(world: &mut ApiWorld) {
     sleep(Duration::from_secs(2)).await;
     let response = world
         .client
-        .get(format!("https://api.kraken.com/0/public/Ticker?pair={}", "XBTUSD"))
+        .get(format!("https://{}/0/public/Ticker?pair={}", api_url, "XBTUSD"))
         .send()
         .await
         .unwrap();
@@ -43,7 +43,7 @@ pub async fn i_get_the_time(world: &mut ApiWorld) {
     sleep(Duration::from_secs(1)).await;
     let response = world
         .client
-        .get("https://api.kraken.com/0/public/Time")
+        .get(format!("https://{}/0/public/Time", api_url))
         .send()
         .await
         .unwrap();
@@ -65,7 +65,7 @@ pub async fn i_get_the_orders(world: &mut ApiWorld) {
     let sign = compute_signature(&secret, urlpath, &nonce).expect("No signature!");
     let response = world
         .client
-        .post("https://api.kraken.com/0/private/OpenOrders")
+        .post(format!("https://{}/0/private/OpenOrders", api_url))
         .header("API-Key", api_key)
         .header("API-Sign", sign)
         .header("Content-Type", "application/x-www-form-urlencoded; charset=utf-8")
@@ -125,6 +125,7 @@ pub async fn the_server_time_should_be_retrieved(world: &mut ApiWorld) {
 
 #[tokio::main]
 async fn main() {
+    let api_url = env::var("API").unwrap_or("+API_URL".to_string());
     ApiWorld::run("tests/features/api.features").await;
 }
 

@@ -32,4 +32,4 @@ To build a docker image:
 - With Docker running execute -> `docker build -t rust_project .`
 
 To run tests inside a container:
-- With Docker running execute -> `docker run --rm -e PRIVATE_KEY="API PK here" -e API_KEY="API key here" rust_project`
+- With Docker running execute -> `docker run --rm -e PRIVATE_KEY="API PK here" -e API_KEY="API key here" -e API="API url here" rust_project`

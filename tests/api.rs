@@ -13,6 +13,7 @@ use std::time::{SystemTime, UNIX_EPOCH};
 #[derive(cucumber::World, Debug, Default)]
 pub struct ApiWorld {
     client: Client,
+
     response_status_time: Option<u16>,
     response_body_time: Option<String>,
     response_status_pair: Option<u16>,
@@ -55,9 +56,8 @@ pub async fn i_get_the_time(world: &mut ApiWorld) {
 
 #[when("I get all open orders")]
 pub async fn i_get_the_orders(world: &mut ApiWorld) {
-    let api_key = env::var("API_KEY").unwrap_or("oqv7bFwrZ38iSQpmfWbNmS9f0b46LFYtha+w9wDLQKxX7u5l2fh7DFgt".to_string());
-    sleep(Duration::from_secs(1)).await;
-    let secret = "9r2f3HidawfslYFFx5xno009H/XJKiR97Q/mO/W/XafRlFiTcyAjOYZQRZpG4P63akab9CnMZEqvSmedgrLYUQ==";
+    let api_key = env::var("API_KEY").unwrap_or("+API_KEY".to_string());
+    let secret = env::var("PRIVATE_KEY").unwrap_or("+PRIVATE_KEY".to_string());;
     let urlpath = "/0/private/OpenOrders";
     // nonce from compute 1719502312486, must be > 1616492376594003
     let nonce = compute_nonce() * 1000;
